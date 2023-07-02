@@ -13,7 +13,7 @@ def factorize_file(file_path):
             number = int(line.strip())
             factor1, factor2 = factorize_number(number)
             if factor1 and factor2:
-                print(f"{number} = {factor1} * {factor2}")
+                print(f"{number}={factor1}*{factor2}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
