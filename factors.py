@@ -6,9 +6,9 @@ def pollards_rho_factorize(n):
     if n % 2 == 0:
         return 2, n / 2
     if n % 3 == 0:
-        return 3
+        return 3, n / 3
     if n % 5 == 0:
-        return 5
+        return 5, n / 5
     x = 2
     y = 2
     d = 1
