@@ -21,31 +21,27 @@ def factorize(n):
         return 3, n / 3
     if n % 5 == 0:
         return 5, n / 5
-    x = 5
-    y = 5
+    x = y = 2
     d = 1
-
     f = lambda x: (x**2 + 1) % n
-
     while d == 1:
         x = f(x)
         y = f(f(y))
         d = math.gcd(abs(x - y), n)
-
-    if d == n:
-        return 1, n
-
-    return d, n // d
+    return d
 
 def factorize_file(file_path):
     with open(file_path, 'r') as file:
         for line in file:
             number = int(line)
-            factor1, factor2 = factorize(number)
-            if factor1 and factor2:
-                print(f"{number}={factor1}*{factor2}")
-            else:
+            p = factorize(number)
+            if p != number:
+                while not is_prime(p) and p != number:
+                    p = pollard_rho(p)
+            if p == number:
                 print(f"{number}")
+            else:
+                print(f"{number}={p}*{number // p}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -54,4 +50,3 @@ if __name__ == "__main__":
 
     file_path = sys.argv[1]
     factorize_file(file_path)
-
