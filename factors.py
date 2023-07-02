@@ -1,17 +1,32 @@
 #!/usr/bin/python3
 import sys
+from math import gcd
 
-def factorize_number(number):
-    for divisor in range(2, int(number**0.5) + 1):
-        if number % divisor == 0:
-            return divisor, int(number/divisor)
-    return None, None
+def pollards_rho_factorize(n):
+    if n % 2 == 0:
+        return 2, n // 2
+
+    x = 2
+    y = 2
+    d = 1
+
+    f = lambda x: (x**2 + 1) % n
+
+    while d == 1:
+        x = f(x)
+        y = f(f(y))
+        d = gcd(abs(x - y), n)
+
+    if d == n:
+        return None, None
+
+    return d, n // d
 
 def factorize_file(file_path):
     with open(file_path, 'r') as file:
         for line in file:
             number = int(line.strip())
-            factor1, factor2 = factorize_number(number)
+            factor1, factor2 = pollards_rho_factorize(number)
             if factor1 and factor2:
                 print(f"{number}={factor1}*{factor2}")
 
