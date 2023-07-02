@@ -4,7 +4,7 @@ from math import gcd
 
 def pollards_rho_factorize(n):
     if n % 2 == 0:
-        return 2, n // 2
+        return 2, n / 2
 
     x = 2
     y = 2
@@ -18,17 +18,16 @@ def pollards_rho_factorize(n):
         d = gcd(abs(x - y), n)
 
     if d == n:
-        return None, None
+        return 1, n
 
     return d, n // d
 
 def factorize_file(file_path):
     with open(file_path, 'r') as file:
         for line in file:
-            number = int(line.strip())
+            number = int(line)
             factor1, factor2 = pollards_rho_factorize(number)
-            if factor1 and factor2:
-                print(f"{number}={factor1}*{factor2}")
+            print(f"{number}={factor1}*{factor2}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -37,5 +36,4 @@ if __name__ == "__main__":
 
     file_path = sys.argv[1]
     factorize_file(file_path)
-    sys.exit(1)
 
