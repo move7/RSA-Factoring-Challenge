@@ -30,7 +30,7 @@ def factorize_file(file_path):
         for line in file:
             number = int(line)
             factor1, factor2 = pollards_rho_factorize(number)
-            print(f"{number}={factor1}*{factor2}")
+            print(f"{number}={int(factor1)}*{int(factor2)}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
