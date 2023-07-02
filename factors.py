@@ -9,8 +9,8 @@ def pollards_rho_factorize(n):
         return 3, n / 3
     if n % 5 == 0:
         return 5, n / 5
-    x = 5
-    y = 5
+    x = 2
+    y = 2
     d = 1
 
     f = lambda x: (x**2 + 1) % n

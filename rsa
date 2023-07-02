@@ -15,21 +15,27 @@ def is_prime(num):
     return True
 
 def factorize(n):
-    if n < 2:
-        return None, None
     if n % 2 == 0:
-        return 2, n // 2
+        return 2, n / 2
     if n % 3 == 0:
-        return 3, n // 3
-    sqrt_n = int(math.sqrt(n)) + 1
-    for i in range(5, sqrt_n, 6):
-        if n % i == 0:
-            if is_prime(i) and is_prime(n // i):
-                return i, n // i
-        if n % (i + 2) == 0:
-            if is_prime(i + 2) and is_prime(n // (i + 2)):
-                return i + 2, n // (i + 2)
-    return None, None
+        return 3, n / 3
+    if n % 5 == 0:
+        return 5, n / 5
+    x = 5
+    y = 5
+    d = 1
+
+    f = lambda x: (x**2 + 1) % n
+
+    while d == 1:
+        x = f(x)
+        y = f(f(y))
+        d = math.gcd(abs(x - y), n)
+
+    if d == n:
+        return 1, n
+
+    return d, n // d
 
 def factorize_file(file_path):
     with open(file_path, 'r') as file:
@@ -48,3 +54,4 @@ if __name__ == "__main__":
 
     file_path = sys.argv[1]
     factorize_file(file_path)
+
