@@ -37,7 +37,7 @@ def factorize_file(file_path):
             number = int(line)
             factor1, factor2 = factorize(number)
             if factor1 and factor2:
-                print(f"{number} = {factor1} * {factor2}")
+                print(f"{number}={factor1}*{factor2}")
             else:
                 print(f"{number}")
 
